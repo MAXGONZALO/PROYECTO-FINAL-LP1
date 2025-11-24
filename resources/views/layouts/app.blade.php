@@ -30,6 +30,25 @@
             color: var(--text-dark);
             background-color: var(--bg-light);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (min-width: 1536px) {
+            .container {
+                max-width: 1400px;
+            }
+        }
+        
+        main {
+            width: 100%;
+            overflow-x: hidden;
         }
         
         .navbar {
@@ -314,7 +333,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="min-h-screen">
+    <main class="min-h-screen bg-white">
         @yield('content')
     </main>
 

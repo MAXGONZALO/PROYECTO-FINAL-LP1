@@ -4,14 +4,14 @@
 
 @section('content')
 <!-- Hero Banner -->
-<section class="hero-gradient text-white py-20 lg:py-32 relative overflow-hidden">
+<section class="hero-gradient text-white py-16 md:py-24 lg:py-32 relative overflow-hidden" style="min-height: 500px;">
     <div class="absolute inset-0 bg-black opacity-10"></div>
     <div class="container mx-auto px-4 lg:px-6 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 ¡NUEVO INGRESO!
             </h1>
-            <p class="text-xl md:text-2xl mb-8 text-green-100">
+            <p class="text-lg sm:text-xl md:text-2xl mb-8 text-green-100">
                 Los mejores productos tecnológicos al mejor precio
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -27,22 +27,23 @@
             </div>
         </div>
     </div>
-    <div class="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#FDFDFC"/>
+    <!-- Wave separator -->
+    <div class="absolute bottom-0 left-0 right-0" style="height: 100px; z-index: 0; pointer-events: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none" style="width: 100%; height: 100%; display: block;">
+            <path d="M0,100 L60,90 C120,80 240,60 360,50 C480,40 600,40 720,45 C840,50 960,60 1080,65 C1200,70 1320,70 1380,70 L1440,70 L1440,100 L1380,100 C1320,100 1200,100 1080,100 C960,100 840,100 720,100 C600,100 480,100 360,100 C240,100 120,100 60,100 Z" fill="#FDFDFC"></path>
         </svg>
     </div>
 </section>
 
-<div class="container mx-auto px-4 lg:px-6 py-12 lg:py-16">
+<div class="container mx-auto px-4 lg:px-6 py-8 md:py-12 lg:py-16">
     <!-- Categorías -->
     @if($categories->count() > 0)
-    <section id="categorias" class="mb-20">
-        <div class="text-center mb-12">
+    <section id="categorias" class="mb-12 md:mb-16 lg:mb-20">
+        <div class="text-center mb-8 md:mb-10 lg:mb-12">
             <h2 class="section-title mb-4">Nuestras Categorías</h2>
             <p class="text-gray-600 text-lg">Encuentra lo que buscas en nuestras categorías</p>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 lg:gap-6">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-6">
             @foreach($categories as $category)
             <a href="{{ route('products.category', $category->slug) }}" class="group">
                 <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-green-200 text-center">
@@ -65,8 +66,8 @@
 
     <!-- Productos Destacados -->
     @if($featuredProducts->count() > 0)
-    <section class="mb-20">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
+    <section class="mb-12 md:mb-16 lg:mb-20">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 md:mb-10 lg:mb-12 gap-4">
             <div>
                 <h2 class="section-title mb-2">Productos Destacados</h2>
                 <p class="text-gray-600">Los productos más populares de nuestra tienda</p>
@@ -78,7 +79,7 @@
                 </svg>
             </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             @foreach($featuredProducts as $product)
             <div class="product-card">
                 <a href="{{ route('products.show', $product->slug) }}">
@@ -143,8 +144,8 @@
 
     <!-- Últimos Productos -->
     @if($latestProducts->count() > 0)
-    <section class="mb-20">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
+    <section class="mb-12 md:mb-16 lg:mb-20">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 md:mb-10 lg:mb-12 gap-4">
             <div>
                 <h2 class="section-title mb-2">Últimos Productos</h2>
                 <p class="text-gray-600">Recién llegados a nuestra tienda</p>
@@ -156,7 +157,7 @@
                 </svg>
             </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             @foreach($latestProducts as $product)
             <div class="product-card">
                 <a href="{{ route('products.show', $product->slug) }}">
@@ -214,13 +215,13 @@
 
     <!-- Marcas -->
     @if($brands->count() > 0)
-    <section class="mb-20">
-        <div class="text-center mb-12">
+    <section class="mb-12 md:mb-16 lg:mb-20">
+        <div class="text-center mb-8 md:mb-10 lg:mb-12">
             <h2 class="section-title mb-4">Nuestras Marcas</h2>
             <p class="text-gray-600 text-lg">Trabajamos con las mejores marcas del mercado</p>
         </div>
         <div class="bg-white rounded-2xl p-8 lg:p-12 shadow-lg border border-gray-100">
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 lg:gap-8">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
                 @foreach($brands as $brand)
                 <div class="flex items-center justify-center p-4 bg-gray-50 rounded-xl hover:bg-green-50 transition-colors border border-gray-100 hover:border-green-200">
                     @if($brand->logo)
@@ -236,7 +237,7 @@
     @endif
 
     <!-- Call to Action -->
-    <section class="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-8 lg:p-12 text-white text-center mb-20">
+    <section class="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-6 md:p-8 lg:p-12 text-white text-center mb-12 md:mb-16 lg:mb-20">
         <h2 class="text-3xl lg:text-4xl font-bold mb-4">¿Buscas algo específico?</h2>
         <p class="text-lg text-green-100 mb-8 max-w-2xl mx-auto">
             Explora nuestro catálogo completo y encuentra exactamente lo que necesitas
