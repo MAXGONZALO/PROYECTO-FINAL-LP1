@@ -39,7 +39,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $product->id }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
+                            <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
                         @else
                             <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center">
                                 <span>🖥️</span>

@@ -6,6 +6,7 @@ use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\CartController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -43,4 +44,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('brands', App\Http\Controllers\Admin\BrandController::class);
         Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
     });
+});
+
+// Carrito de compras
+Route::prefix('carrito')->name('cart.')->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('index');
+    Route::post('/agregar/{product:slug}', [CartController::class, 'add'])->name('add');
+    Route::post('/comprar-ahora/{product:slug}', [CartController::class, 'buyNow'])->name('buy-now');
+    Route::patch('/{product:slug}', [CartController::class, 'update'])->name('update');
+    Route::delete('/{product:slug}', [CartController::class, 'remove'])->name('remove');
 });

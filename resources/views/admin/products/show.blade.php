@@ -21,7 +21,7 @@
             <!-- Imagen -->
             <div>
                 @if($product->image)
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-96 object-contain bg-gray-50 rounded-lg p-4">
+                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full h-96 object-contain bg-gray-50 rounded-lg p-4">
                 @else
                     <div class="w-full h-96 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center rounded-lg">
                         <span class="text-8xl">🖥️</span>

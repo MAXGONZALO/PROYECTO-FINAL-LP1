@@ -8,7 +8,7 @@
         <!-- Header -->
         <div class="mb-8">
             <nav class="text-sm text-gray-600 mb-4">
-                <a href="{{ route('home') }}" class="hover:text-green-600">Inicio</a> / 
+                <a href="{{ route('home') }}" class="hover:text-red-600">Inicio</a> / 
                 <span class="text-gray-900">Productos</span>
             </nav>
             <h1 class="section-title mb-2">Nuestros Productos</h1>
@@ -25,7 +25,7 @@
                     <form action="{{ route('products.index') }}" method="GET" class="mb-6">
                         <div class="relative">
                             <input type="text" name="search" placeholder="Buscar productos..." 
-                                   class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50 text-sm"
+                                   class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50 text-sm"
                                    value="{{ request('search') }}">
                             <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -39,14 +39,14 @@
                         <ul class="space-y-2">
                             <li>
                                 <a href="{{ route('products.index') }}" 
-                                   class="block px-3 py-2 rounded-lg transition-colors {{ !request('category') ? 'bg-green-50 text-green-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-green-600' }}">
+                                   class="block px-3 py-2 rounded-lg transition-colors {{ !request('category') ? 'bg-red-50 text-red-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-red-600' }}">
                                     Todas las categorías
                                 </a>
                             </li>
                             @foreach($categories as $category)
                             <li>
                                 <a href="{{ route('products.index', ['category' => $category->id]) }}" 
-                                   class="block px-3 py-2 rounded-lg transition-colors {{ request('category') == $category->id ? 'bg-green-50 text-green-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-green-600' }}">
+                                   class="block px-3 py-2 rounded-lg transition-colors {{ request('category') == $category->id ? 'bg-red-50 text-red-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-red-600' }}">
                                     {{ $category->name }}
                                 </a>
                             </li>
@@ -60,14 +60,14 @@
                         <ul class="space-y-2">
                             <li>
                                 <a href="{{ route('products.index') }}" 
-                                   class="block px-3 py-2 rounded-lg transition-colors {{ !request('brand') ? 'bg-green-50 text-green-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-green-600' }}">
+                                   class="block px-3 py-2 rounded-lg transition-colors {{ !request('brand') ? 'bg-red-50 text-red-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-red-600' }}">
                                     Todas las marcas
                                 </a>
                             </li>
                             @foreach($brands as $brand)
                             <li>
                                 <a href="{{ route('products.index', ['brand' => $brand->id]) }}" 
-                                   class="block px-3 py-2 rounded-lg transition-colors {{ request('brand') == $brand->id ? 'bg-green-50 text-green-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-green-600' }}">
+                                   class="block px-3 py-2 rounded-lg transition-colors {{ request('brand') == $brand->id ? 'bg-red-50 text-red-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-red-600' }}">
                                     {{ $brand->name }}
                                 </a>
                             </li>
@@ -83,7 +83,7 @@
                                 <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                             @endforeach
                             <select name="sort" onchange="this.form.submit()" 
-                                    class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50 text-sm">
+                                    class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50 text-sm">
                                 <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Más recientes</option>
                                 <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Precio: menor a mayor</option>
                                 <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Precio: mayor a menor</option>
@@ -110,7 +110,12 @@
                         <a href="{{ route('products.show', $product->slug) }}">
                             <div class="relative overflow-hidden bg-gray-100">
                                 @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
+                                    @php
+                                        $imageUrl = (str_starts_with($product->image, 'http://') || str_starts_with($product->image, 'https://')) 
+                                            ? $product->image 
+                                            : asset('storage/' . $product->image);
+                                    @endphp
+                                    <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 @else
                                     <div class="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
                                         <span class="text-6xl">🖥️</span>
@@ -131,7 +136,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <div class="flex items-baseline gap-2">
-                                        <p class="text-2xl font-bold text-green-600">S/{{ number_format($product->price, 2) }}</p>
+                                        <p class="text-2xl font-bold text-red-600">S/{{ number_format($product->price, 2) }}</p>
                                         @if($product->compare_price)
                                             <p class="text-sm text-gray-400 line-through">S/{{ number_format($product->compare_price, 2) }}</p>
                                         @endif

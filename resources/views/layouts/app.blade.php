@@ -11,11 +11,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         :root {
-            --primary-color: #22c55e;
-            --primary-dark: #16a34a;
-            --primary-light: #86efac;
-            --text-dark: #1b1b18;
-            --text-light: #706f6c;
+            --primary-color: #dc2626;
+            --primary-dark: #991b1b;
+            --primary-light: #fca5a5;
+            --text-dark: #000000;
+            --text-light: #404040;
             --bg-light: #FDFDFC;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -69,12 +69,12 @@
             border-radius: 0.5rem;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.3);
+            box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3);
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px -2px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 6px 12px -2px rgba(220, 38, 38, 0.4);
         }
         
         .btn-secondary {
@@ -125,7 +125,7 @@
         }
         
         .hero-gradient {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 50%, #7f1d1d 100%);
         }
         
         .mobile-menu {
@@ -175,7 +175,7 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
-                    <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                    <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-black rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform">
                         <span class="text-white font-bold text-xl">C</span>
                     </div>
                     <div class="hidden sm:block">
@@ -186,15 +186,15 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-1">
-                    <a href="{{ route('home') }}" class="px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-colors rounded-lg hover:bg-green-50">
+                    <a href="{{ route('home') }}" class="px-4 py-2 text-gray-700 hover:text-red-600 font-medium transition-colors rounded-lg hover:bg-red-50">
                         Inicio
                     </a>
-                    <a href="{{ route('products.index') }}" class="px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-colors rounded-lg hover:bg-green-50">
+                    <a href="{{ route('products.index') }}" class="px-4 py-2 text-gray-700 hover:text-red-600 font-medium transition-colors rounded-lg hover:bg-red-50">
                         Productos
                     </a>
                     @if(isset($navCategories) && $navCategories->count() > 0)
                     <div class="relative group">
-                        <button class="px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-colors rounded-lg hover:bg-green-50 flex items-center space-x-1">
+                        <button class="px-4 py-2 text-gray-700 hover:text-red-600 font-medium transition-colors rounded-lg hover:bg-red-50 flex items-center space-x-1">
                             <span>Categorías</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -203,11 +203,11 @@
                         <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                             <div class="p-2">
                                 @foreach($navCategories as $cat)
-                                <a href="{{ route('products.category', $cat->slug) }}" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-lg transition-colors">
+                                <a href="{{ route('products.category', $cat->slug) }}" class="block px-4 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors">
                                     {{ $cat->name }}
                                 </a>
                                 @endforeach
-                                <a href="{{ route('products.index') }}" class="block px-4 py-2 text-green-600 font-semibold hover:bg-green-50 rounded-lg mt-2 border-t border-gray-200 pt-2">
+                                <a href="{{ route('products.index') }}" class="block px-4 py-2 text-red-600 font-semibold hover:bg-red-50 rounded-lg mt-2 border-t border-gray-200 pt-2">
                                     Ver todas →
                                 </a>
                             </div>
@@ -216,7 +216,7 @@
                     @endif
                     @if(isset($navBrands) && $navBrands->count() > 0)
                     <div class="relative group">
-                        <button class="px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-colors rounded-lg hover:bg-green-50 flex items-center space-x-1">
+                        <button class="px-4 py-2 text-gray-700 hover:text-red-600 font-medium transition-colors rounded-lg hover:bg-red-50 flex items-center space-x-1">
                             <span>Marcas</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -225,7 +225,7 @@
                         <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                             <div class="p-2">
                                 @foreach($navBrands as $brand)
-                                <a href="{{ route('products.brand', $brand->slug) }}" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-lg transition-colors">
+                                <a href="{{ route('products.brand', $brand->slug) }}" class="block px-4 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors">
                                     {{ $brand->name }}
                                 </a>
                                 @endforeach
@@ -240,7 +240,7 @@
                     <form action="{{ route('products.index') }}" method="GET" class="flex-1">
                         <div class="relative">
                             <input type="text" name="search" placeholder="Buscar productos..." 
-                                   class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50 text-sm"
+                                   class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-50 text-sm"
                                    value="{{ request('search') }}">
                             <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -252,20 +252,16 @@
                 <!-- User Actions -->
                 <div class="hidden md:flex items-center space-x-4">
                     @auth
-                        <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-green-600 font-medium transition-colors">
-                            Dashboard
-                        </a>
                         <a href="{{ route('admin.products.index') }}" class="btn-secondary text-sm py-2 px-4">
                             Admin
                         </a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-gray-700 hover:text-green-600 font-medium transition-colors">
-                            Iniciar Sesión
-                        </a>
-                        <a href="{{ route('register') }}" class="btn-primary text-sm py-2 px-4">
-                            Registrarse
-                        </a>
                     @endauth
+                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-red-600 font-medium transition-colors">
+                        Iniciar Sesión
+                    </a>
+                    <a href="{{ route('register') }}" class="btn-primary text-sm py-2 px-4">
+                        Registrarse
+                    </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -288,16 +284,16 @@
                 </button>
             </div>
             <nav class="space-y-2">
-                <a href="{{ route('home') }}" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-lg font-medium transition-colors">
+                <a href="{{ route('home') }}" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg font-medium transition-colors">
                     Inicio
                 </a>
-                <a href="{{ route('products.index') }}" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-lg font-medium transition-colors">
+                <a href="{{ route('products.index') }}" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg font-medium transition-colors">
                     Productos
                 </a>
                 @if(isset($navCategories) && $navCategories->count() > 0)
                 <div class="px-4 py-2 text-gray-500 text-sm font-semibold uppercase tracking-wide">Categorías</div>
                 @foreach($navCategories as $cat)
-                <a href="{{ route('products.category', $cat->slug) }}" class="block px-8 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-lg font-medium transition-colors text-sm">
+                <a href="{{ route('products.category', $cat->slug) }}" class="block px-8 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg font-medium transition-colors text-sm">
                     {{ $cat->name }}
                 </a>
                 @endforeach
@@ -305,27 +301,23 @@
                 @if(isset($navBrands) && $navBrands->count() > 0)
                 <div class="px-4 py-2 text-gray-500 text-sm font-semibold uppercase tracking-wide mt-4">Marcas</div>
                 @foreach($navBrands as $brand)
-                <a href="{{ route('products.brand', $brand->slug) }}" class="block px-8 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-lg font-medium transition-colors text-sm">
+                <a href="{{ route('products.brand', $brand->slug) }}" class="block px-8 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg font-medium transition-colors text-sm">
                     {{ $brand->name }}
                 </a>
                 @endforeach
                 @endif
                 <div class="pt-4 border-t border-gray-200">
                     @auth
-                        <a href="{{ route('dashboard') }}" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-lg font-medium transition-colors">
-                            Dashboard
-                        </a>
-                        <a href="{{ route('admin.products.index') }}" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-lg font-medium transition-colors">
+                        <a href="{{ route('admin.products.index') }}" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg font-medium transition-colors">
                             Admin
                         </a>
-                    @else
-                        <a href="{{ route('login') }}" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-lg font-medium transition-colors">
-                            Iniciar Sesión
-                        </a>
-                        <a href="{{ route('register') }}" class="block px-4 py-3 bg-green-600 text-white rounded-lg font-medium text-center">
-                            Registrarse
-                        </a>
                     @endauth
+                    <a href="{{ route('login') }}" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg font-medium transition-colors">
+                        Iniciar Sesión
+                    </a>
+                    <a href="{{ route('register') }}" class="block px-4 py-3 bg-red-600 text-white rounded-lg font-medium text-center">
+                        Registrarse
+                    </a>
                 </div>
             </nav>
         </div>
@@ -343,7 +335,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center">
+                        <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-black rounded-lg flex items-center justify-center">
                             <span class="text-white font-bold text-xl">C</span>
                         </div>
                         <div>

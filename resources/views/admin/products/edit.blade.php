@@ -78,7 +78,7 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Imagen Principal</label>
                 @if($product->image)
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-32 h-32 object-cover mb-2 rounded">
+                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-32 h-32 object-cover mb-2 rounded">
                 @endif
                 <input type="file" name="image" accept="image/*"
                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">

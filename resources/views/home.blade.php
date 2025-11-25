@@ -11,7 +11,7 @@
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 ¡NUEVO INGRESO!
             </h1>
-            <p class="text-lg sm:text-xl md:text-2xl mb-8 text-green-100">
+            <p class="text-lg sm:text-xl md:text-2xl mb-8 text-red-100">
                 Los mejores productos tecnológicos al mejor precio
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -21,7 +21,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
                 </a>
-                <a href="#categorias" class="btn-secondary inline-flex items-center justify-center space-x-2 bg-white text-green-600 border-white">
+                <a href="#categorias" class="btn-secondary inline-flex items-center justify-center space-x-2 bg-white text-red-600 border-white">
                     <span>Explorar Categorías</span>
                 </a>
             </div>
@@ -46,17 +46,17 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-6">
             @foreach($categories as $category)
             <a href="{{ route('products.category', $category->slug) }}" class="group">
-                <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-green-200 text-center">
+                <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-red-200 text-center">
                     @if($category->image)
                         <div class="w-16 h-16 mx-auto mb-4 rounded-lg overflow-hidden bg-gray-50 group-hover:scale-110 transition-transform duration-300">
                             <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="w-full h-full object-cover">
                         </div>
                     @else
-                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             <span class="text-3xl">📦</span>
                         </div>
                     @endif
-                    <p class="text-sm font-semibold text-gray-800 group-hover:text-green-600 transition-colors">{{ $category->name }}</p>
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-red-600 transition-colors">{{ $category->name }}</p>
                 </div>
             </a>
             @endforeach
@@ -72,7 +72,7 @@
                 <h2 class="section-title mb-2">Productos Destacados</h2>
                 <p class="text-gray-600">Los productos más populares de nuestra tienda</p>
             </div>
-            <a href="{{ route('products.index') }}" class="text-green-600 hover:text-green-700 font-semibold inline-flex items-center space-x-2 transition-colors">
+            <a href="{{ route('products.index') }}" class="text-red-600 hover:text-red-700 font-semibold inline-flex items-center space-x-2 transition-colors">
                 <span>Ver todos</span>
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -85,7 +85,12 @@
                 <a href="{{ route('products.show', $product->slug) }}">
                     <div class="relative overflow-hidden bg-gray-100">
                         @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
+                            @php
+                                $imageUrl = (str_starts_with($product->image, 'http://') || str_starts_with($product->image, 'https://')) 
+                                    ? $product->image 
+                                    : asset('storage/' . $product->image);
+                            @endphp
+                            <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         @else
                             <div class="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
                                 <span class="text-6xl">🖥️</span>
@@ -113,7 +118,7 @@
                         </div>
                         <div class="mb-4">
                             <div class="flex items-baseline gap-2">
-                                <p class="text-2xl font-bold text-green-600">S/{{ number_format($product->price, 2) }}</p>
+                                <p class="text-2xl font-bold text-red-600">S/{{ number_format($product->price, 2) }}</p>
                                 @if($product->compare_price)
                                     <p class="text-sm text-gray-400 line-through">S/{{ number_format($product->compare_price, 2) }}</p>
                                 @endif
@@ -150,7 +155,7 @@
                 <h2 class="section-title mb-2">Últimos Productos</h2>
                 <p class="text-gray-600">Recién llegados a nuestra tienda</p>
             </div>
-            <a href="{{ route('products.index') }}" class="text-green-600 hover:text-green-700 font-semibold inline-flex items-center space-x-2 transition-colors">
+            <a href="{{ route('products.index') }}" class="text-red-600 hover:text-red-700 font-semibold inline-flex items-center space-x-2 transition-colors">
                 <span>Ver todos</span>
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -163,7 +168,12 @@
                 <a href="{{ route('products.show', $product->slug) }}">
                     <div class="relative overflow-hidden bg-gray-100">
                         @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
+                            @php
+                                $imageUrl = (str_starts_with($product->image, 'http://') || str_starts_with($product->image, 'https://')) 
+                                    ? $product->image 
+                                    : asset('storage/' . $product->image);
+                            @endphp
+                            <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         @else
                             <div class="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
                                 <span class="text-6xl">🖥️</span>
@@ -184,7 +194,7 @@
                         </div>
                         <div class="mb-4">
                             <div class="flex items-baseline gap-2">
-                                <p class="text-2xl font-bold text-green-600">S/{{ number_format($product->price, 2) }}</p>
+                                <p class="text-2xl font-bold text-red-600">S/{{ number_format($product->price, 2) }}</p>
                                 @if($product->compare_price)
                                     <p class="text-sm text-gray-400 line-through">S/{{ number_format($product->compare_price, 2) }}</p>
                                 @endif
@@ -223,7 +233,7 @@
         <div class="bg-white rounded-2xl p-8 lg:p-12 shadow-lg border border-gray-100">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
                 @foreach($brands as $brand)
-                <div class="flex items-center justify-center p-4 bg-gray-50 rounded-xl hover:bg-green-50 transition-colors border border-gray-100 hover:border-green-200">
+                <div class="flex items-center justify-center p-4 bg-gray-50 rounded-xl hover:bg-red-50 transition-colors border border-gray-100 hover:border-red-200">
                     @if($brand->logo)
                         <img src="{{ asset('storage/' . $brand->logo) }}" alt="{{ $brand->name }}" class="h-12 w-auto object-contain max-w-full">
                     @else
@@ -237,12 +247,12 @@
     @endif
 
     <!-- Call to Action -->
-    <section class="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-6 md:p-8 lg:p-12 text-white text-center mb-12 md:mb-16 lg:mb-20">
+    <section class="bg-gradient-to-r from-red-600 to-red-800 rounded-2xl p-6 md:p-8 lg:p-12 text-white text-center mb-12 md:mb-16 lg:mb-20">
         <h2 class="text-3xl lg:text-4xl font-bold mb-4">¿Buscas algo específico?</h2>
-        <p class="text-lg text-green-100 mb-8 max-w-2xl mx-auto">
+        <p class="text-lg text-red-100 mb-8 max-w-2xl mx-auto">
             Explora nuestro catálogo completo y encuentra exactamente lo que necesitas
         </p>
-        <a href="{{ route('products.index') }}" class="btn-primary bg-white text-green-600 hover:bg-gray-100 inline-flex items-center space-x-2">
+        <a href="{{ route('products.index') }}" class="btn-primary bg-white text-red-600 hover:bg-gray-100 inline-flex items-center space-x-2">
             <span>Ver Catálogo Completo</span>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>

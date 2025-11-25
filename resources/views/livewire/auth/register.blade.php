@@ -9,6 +9,7 @@
             @csrf
 
             <!-- Name -->
+            <div>
             <flux:input
                 name="name"
                 :label="__('Name')"
@@ -18,9 +19,15 @@
                 autofocus
                 autocomplete="name"
                 :placeholder="__('Full name')"
+                    :error="$errors->first('name')"
             />
+                @error('name')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
 
             <!-- Email Address -->
+            <div>
             <flux:input
                 name="email"
                 :label="__('Email address')"
@@ -29,9 +36,15 @@
                 required
                 autocomplete="email"
                 placeholder="email@example.com"
+                    :error="$errors->first('email')"
             />
+                @error('email')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
 
             <!-- Password -->
+            <div>
             <flux:input
                 name="password"
                 :label="__('Password')"
@@ -40,9 +53,15 @@
                 autocomplete="new-password"
                 :placeholder="__('Password')"
                 viewable
+                    :error="$errors->first('password')"
             />
+                @error('password')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
 
             <!-- Confirm Password -->
+            <div>
             <flux:input
                 name="password_confirmation"
                 :label="__('Confirm password')"
@@ -52,6 +71,7 @@
                 :placeholder="__('Confirm password')"
                 viewable
             />
+            </div>
 
             <div class="flex items-center justify-end">
                 <flux:button type="submit" variant="primary" class="w-full">

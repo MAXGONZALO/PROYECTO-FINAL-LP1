@@ -59,6 +59,25 @@ class Product extends Model
         return round((($this->compare_price - $this->price) / $this->compare_price) * 100);
     }
 
+    /**
+     * Obtiene la URL de la imagen del producto
+     * Maneja tanto URLs externas como archivos locales
+     */
+    public function getImageUrlAttribute()
+    {
+        if (empty($this->image)) {
+            return null;
+        }
+
+        // Si la imagen es una URL externa (http:// o https://), devolverla directamente
+        if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
+            return $this->image;
+        }
+
+        // Si es un archivo local, usar asset con storage
+        return asset('storage/' . $this->image);
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -7,8 +7,8 @@
     <div class="container mx-auto px-4 lg:px-6">
         <!-- Breadcrumb -->
         <nav class="text-sm text-gray-600 mb-6">
-            <a href="{{ route('home') }}" class="hover:text-green-600">Inicio</a> / 
-            <a href="{{ route('products.index') }}" class="hover:text-green-600">Productos</a> / 
+            <a href="{{ route('home') }}" class="hover:text-red-600">Inicio</a> / 
+            <a href="{{ route('products.index') }}" class="hover:text-red-600">Productos</a> / 
             <span class="text-gray-900">{{ $brand->name }}</span>
         </nav>
 
@@ -41,7 +41,12 @@
                 <a href="{{ route('products.show', $product->slug) }}">
                     <div class="relative overflow-hidden bg-gray-100">
                         @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
+                            @php
+                                $imageUrl = (str_starts_with($product->image, 'http://') || str_starts_with($product->image, 'https://')) 
+                                    ? $product->image 
+                                    : asset('storage/' . $product->image);
+                            @endphp
+                            <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         @else
                             <div class="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
                                 <span class="text-6xl">🖥️</span>
@@ -62,7 +67,7 @@
                         </div>
                         <div class="mb-4">
                             <div class="flex items-baseline gap-2">
-                                <p class="text-2xl font-bold text-green-600">S/{{ number_format($product->price, 2) }}</p>
+                                <p class="text-2xl font-bold text-red-600">S/{{ number_format($product->price, 2) }}</p>
                                 @if($product->compare_price)
                                     <p class="text-sm text-gray-400 line-through">S/{{ number_format($product->compare_price, 2) }}</p>
                                 @endif
